@@ -1,0 +1,144 @@
+openapi: 3.0.0
+info:
+  title: Mushroom Shop Product Service API
+  description: API for managing mushroom products and orders
+  version: 1.0.0
+
+servers:
+  - url: /api/v1
+
+components:
+  schemas:
+    UnitType:
+      type: string
+      enum: [gram, kilogram]
+    CategoryType:
+      type: string
+      enum: [culinary, medicinal, exotic]
+
+    ProductItem:
+      type: object
+      required:
+        - id
+        - name
+        - description
+        - price
+        - quantity
+        - unit
+        - category
+        - inStock
+        - createdAt
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+          example: "Shiitake"
+        description:
+          type: string
+          example: "Fresh organic shiitake mushrooms"
+        price:
+          type: number
+          format: float
+          example: 12.99
+        quantity:
+          type: integer
+          example: 100
+        unit:
+          $ref: "#/components/schemas/UnitType"
+        category:
+          $ref: "#/components/schemas/CategoryType"
+        inStock:
+          type: boolean
+          example: true
+        createdAt:
+          type: string
+          format: date-time
+
+    Pagination:
+      type: object
+      required:
+        - total
+        - limit
+        - page
+      properties:
+        total:
+          type: integer
+        limit:
+          type: integer
+        page:
+          type: integer
+
+    Error:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
+
+  parameters:
+    PaginationLimit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        enum: [1, 20, 50]
+        x-enum-varnames:
+          - min
+          - default
+          - max
+        default: 20
+    PaginationPage:
+      name: page
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+
+paths:
+  /products:
+    get:
+      summary: List all available products
+      parameters:
+        - name: category
+          in: query
+          schema:
+            type: string
+            enum: [culinary, medicinal, exotic]
+          required: false
+        - name: inStockOnly
+          in: query
+          schema:
+            type: boolean
+          required: false
+        - $ref: "#/components/parameters/PaginationPage"
+        - $ref: "#/components/parameters/PaginationLimit"
+      responses:
+        "200":
+          description: List of products
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/ProductItem"
+                  pagination:
+                    $ref: "#/components/schemas/Pagination"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
