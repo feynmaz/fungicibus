@@ -3,8 +3,8 @@ package v1
 import (
 	"net/http"
 
-	"github.com/feynmaz/fungicibus/config"
-	"github.com/feynmaz/fungicibus/internal/logger"
+	"github.com/feynmaz/fungicibus/product/config"
+	"github.com/feynmaz/fungicibus/product/internal/logger"
 )
 
 type API struct {

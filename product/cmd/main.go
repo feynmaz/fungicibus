@@ -6,10 +6,10 @@ import (
 	"os"
 	"os/signal"
 
-	"github.com/feynmaz/fungicibus/config"
-	v1 "github.com/feynmaz/fungicibus/internal/api/v1"
-	"github.com/feynmaz/fungicibus/internal/logger"
-	"github.com/feynmaz/fungicibus/internal/server"
+	"github.com/feynmaz/fungicibus/product/config"
+	v1 "github.com/feynmaz/fungicibus/product/internal/api/v1"
+	"github.com/feynmaz/fungicibus/product/internal/logger"
+	"github.com/feynmaz/fungicibus/product/internal/server"
 )
 
 func main() {

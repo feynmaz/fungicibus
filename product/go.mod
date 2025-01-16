@@ -1,4 +1,4 @@
-module github.com/feynmaz/fungicibus
+module github.com/feynmaz/fungicibus/product
 
 go 1.23.4
 

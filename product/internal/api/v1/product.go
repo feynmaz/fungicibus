@@ -3,7 +3,7 @@ package v1
 import (
 	"net/http"
 
-	"github.com/feynmaz/fungicibus/internal/types"
+	"github.com/feynmaz/fungicibus/product/internal/types"
 )
 
 // List all available products
