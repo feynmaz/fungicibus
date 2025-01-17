@@ -11,7 +11,7 @@ type Logger struct {
 	zerolog.Logger
 }
 
-func New() *Logger {
+func NewLogger() *Logger {
 	output := zerolog.ConsoleWriter{
 		Out:        os.Stdout,
 		TimeFormat: time.RFC3339,
