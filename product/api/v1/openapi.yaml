@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
-  title: Mushroom Shop Product Service API
-  description: API for managing mushroom products and orders
+  title: Fungicibus Product Service API
+  description: API for providing information about products and managing orders
   version: 1.0.0
 
 servers:
